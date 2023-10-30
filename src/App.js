@@ -19,6 +19,9 @@ function reducer(state, action) {
     case "dataFailed":
       return { ...state, status: "error" };
 
+    case "start":
+      return { ...state, status: "active" };
+
     default:
       throw new Error("Action unknown");
   }
@@ -41,7 +44,9 @@ export default function App() {
       <Main className="main">
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && <StartScreen numQuestions={numQuestions} />}
+        {status === "ready" && (
+          <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
+        )}
         {status === "active" && <Questions />}
       </Main>
     </div>
