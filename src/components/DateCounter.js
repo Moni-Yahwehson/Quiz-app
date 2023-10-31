@@ -3,33 +3,30 @@ import { useReducer } from "react";
 const initialState = { count: 0, step: 1 };
 
 function reducer(state, action) {
+  console.log(state, action);
+
   switch (action.type) {
     case "dec":
       return { ...state, count: state.count - state.step };
-
     case "inc":
       return { ...state, count: state.count + state.step };
-
     case "setCount":
       return { ...state, count: action.payload };
-
     case "setStep":
       return { ...state, step: action.payload };
-
     case "reset":
       return initialState;
-
     default:
       throw new Error("Unknown action");
-  }  
+  }
 }
+
 function DateCounter() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   const { count, step } = state;
 
   // This mutates the date object.
-  const date = new Date("October 25 2023");
+  const date = new Date("june 21 2027");
   date.setDate(date.getDate() + count);
 
   const dec = function () {
@@ -50,8 +47,6 @@ function DateCounter() {
 
   const reset = function () {
     dispatch({ type: "reset" });
-    // setCount(0);
-    // setStep(1);
   };
 
   return (
